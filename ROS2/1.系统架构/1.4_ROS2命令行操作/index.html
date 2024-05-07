@@ -1,0 +1,1280 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ROS2入门教程·古月居">
+      
+      
+      
+        <link rel="canonical" href="https://www.guyuehome.com/ROS2/1.%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/">
+      
+      <link rel="icon" href="../../../assets/img/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.15">
+    
+    
+      
+        <title>ROS2命令行操作 - ROS2入门教程</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.c382b1dc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cc9b2e1e.min.css">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ros2" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="ROS2入门教程" class="md-header__button md-logo" aria-label="ROS2入门教程" data-md-component="logo">
+      
+  <img src="../../../assets/img/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ROS2入门教程
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ROS2命令行操作
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://gitee.com/guyuehome" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    guyuehome
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ROS2入门教程" class="md-nav__button md-logo" aria-label="ROS2入门教程" data-md-component="logo">
+      
+  <img src="../../../assets/img/favicon.png" alt="logo">
+
+    </a>
+    ROS2入门教程
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://gitee.com/guyuehome" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    guyuehome
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        引言
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          系统架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="系统架构" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          系统架构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.1_ROS%E5%92%8CROS2%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        ROS和ROS2是什么
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.2_ROS2%E5%AF%B9%E6%AF%94ROS1/" class="md-nav__link">
+        ROS2对比ROS1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.3_ROS2%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/" class="md-nav__link">
+        ROS2安装方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          ROS2命令行操作
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        ROS2命令行操作
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    Linux中的命令行
+  </a>
+  
+    <nav class="md-nav" aria-label="Linux中的命令行">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    启动方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    常用命令操作
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ros2_1" class="md-nav__link">
+    ROS2中的命令行
+  </a>
+  
+    <nav class="md-nav" aria-label="ROS2中的命令行">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    运行节点程序
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    查看节点信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    查看话题信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    发布话题消息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    发送服务请求
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    发送动作目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    录制控制命令
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.5_ROS2%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        ROS2开发环境配置
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          核心概念
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="核心概念" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          核心概念
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2_%E6%A6%82%E5%BF%B5%E6%80%BB%E8%A7%88/" class="md-nav__link">
+        概念总览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2.1_%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4/" class="md-nav__link">
+        工作空间
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2.2_%E5%8A%9F%E8%83%BD%E5%8C%85/" class="md-nav__link">
+        功能包
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2.3_%E8%8A%82%E7%82%B9/" class="md-nav__link">
+        节点
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2.4_%E8%AF%9D%E9%A2%98/" class="md-nav__link">
+        话题
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2.5_%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+        服务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2.6_%E9%80%9A%E4%BF%A1%E6%8E%A5%E5%8F%A3/" class="md-nav__link">
+        通信接口
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2.7_%E5%8A%A8%E4%BD%9C/" class="md-nav__link">
+        动作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2.8_%E5%8F%82%E6%95%B0/" class="md-nav__link">
+        参数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2.9_%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/" class="md-nav__link">
+        分布式通信
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2.10_DDS/" class="md-nav__link">
+        DDS
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          常用工具
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="常用工具" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          常用工具
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3.%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/3.1_Launch/" class="md-nav__link">
+        Launch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3.%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/3.2_TF/" class="md-nav__link">
+        TF
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3.%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/3.3_URDF/" class="md-nav__link">
+        URDF
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3.%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/3.4_Gazebo/" class="md-nav__link">
+        Gazebo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3.%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/3.5_Rviz/" class="md-nav__link">
+        Rviz
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3.%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/3.6_Rqt/" class="md-nav__link">
+        Rqt
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4.%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/4.%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        资源汇总
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://class.guyuehome.com/detail/p_628f4288e4b01c509ab5bc7a/6" class="md-nav__link">
+        视频课程
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://guyuehome.com/Bubble/circleDetail/id/90" class="md-nav__link">
+        教程问答
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.guyuehome.com" class="md-nav__link">
+        博客泡圈
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        关于我们
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    Linux中的命令行
+  </a>
+  
+    <nav class="md-nav" aria-label="Linux中的命令行">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    启动方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    常用命令操作
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ros2_1" class="md-nav__link">
+    ROS2中的命令行
+  </a>
+  
+    <nav class="md-nav" aria-label="ROS2中的命令行">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    运行节点程序
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    查看节点信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    查看话题信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    发布话题消息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    发送服务请求
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    发送动作目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    录制控制命令
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="ros2"><strong>ROS2命令行操作</strong></h1>
+<p><iframe
+  src="//player.bilibili.com/player.html?aid=597395989&bvid=BV16B4y1Q7jQ&cid=746025608&page=4"
+  scrolling="no"
+  border="0"
+  width="800px"
+  height="460px"
+  frameborder="no"
+  framespacing="0"
+  allowfullscreen="true"
+>
+</iframe>
+</p>
+<p>在之前运行小海龟案例的时候，我们接触到了ROS2中一种重要的调试工具——<strong>命令行</strong>，大家如果第一次使用，可能会有点不太适应，本节将带领大家进一步使用ROS2中的更多命令，随着学习的深入，大家一定可以感受到命令行的魅力。</p>
+<p><img alt="image-20220523191347938" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220523191347938.jpg" /></p>
+<h2 id="linux"><strong>Linux中的命令行</strong></h2>
+<p>类似于科幻电影中的片段，命令行操作异常炫酷，但是其上手并不容易。为什么这样一种操作看似并不便捷的方式会被一直保留至今呢？无论对于Linux还是ROS来讲，都是必不可少的，大家先来想象一种场景。</p>
+<p><img alt="image-20220526083430852" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220526083430852.jpg" /></p>
+<p>比如我们去商场买衣服，商场里边的衣服虽然多，但并不是每次都可以满足我们的需求，总有一些时候我们逛来逛去就是哪一件都没有看中，此时你看到某一个商家推出服装定制服务，可以根据现有的所有款式，结合我们自己的需求，自主定制，虽然操作起来麻烦一点，但是灵活度高呀，你想要什么样的就可以设计成什么样的，完全不受既定规则的约束。</p>
+<p><img alt="image-20220526084719912" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220526084719912.jpg" /></p>
+<p>在这种场景中，其他商家为我们呈现出已经做好的衣服，就类似于可视化软件一样，都是被精心设计的，但是并不一定能够完全解决我们的问题，这里定制服务中的各种布料、工具等就类似命令行，我们可以使用这些材料和工具灵活定制各种功能，约束就小很多了。</p>
+<h3 id="_1"><strong>启动方式</strong></h3>
+<p>回到命令行来，一系列的命令都是通过字符的方式输入的，怎么输入呢，并不是使用写字本，而是使用专门的软件，叫做<strong>Terminal，终端</strong>。</p>
+<p>启动终端的方式有很多种：</p>
+<ul>
+<li>在应用列表中打开</li>
+<li>快捷键Ctrl+Alt+T打开</li>
+<li>鼠标右键选择打开终端</li>
+</ul>
+<p><img alt="image-20220524082310466" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082310466.jpg" /></p>
+<p>打开后这个深色背景的窗口就是终端，因为都是命令的输入，所以我们很少会用到鼠标，这也是为什么科幻电影中看到的黑客，笔记本电脑随身带，但是从来看不到鼠标的原因。</p>
+<p>初次上手，大家一定会觉得命令行既枯燥，又难以记忆，这很正常，随着我们对这项工具的熟悉，大家一定可以慢慢体会到命令行操作的魅力所在。</p>
+<p>至于命令行指令及功能参数的数量，确实多到令人发指，不过不用死机硬背，我们常用的命令也就一二十个，其他命令在需要用的时候搜索一下即可。</p>
+<h3 id="_2"><strong>常用命令操作</strong></h3>
+<p>我们先来体验一下Linux的常用命令，找找感觉。</p>
+<p><strong>cd</strong></p>
+<ul>
+<li>
+<p>语法：cd &lt;目录路径&gt;</p>
+</li>
+<li>
+<p>功能：改变工作目录。若没有指定“目录路径”，则回到用户的主目录</p>
+</li>
+</ul>
+<p><strong>pwd</strong></p>
+<ul>
+<li>语法：pwd</li>
+<li>功能：此命令显示出当前工作目录的绝对路径</li>
+</ul>
+<p><img alt="image-20220526085342690" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220526085342690.jpg" /></p>
+<p><strong>mkdir</strong></p>
+<ul>
+<li>
+<p>语法：mkdir [选项] &lt;目录名称&gt;</p>
+</li>
+<li>
+<p>功能：创建一个目录/文件夹</p>
+</li>
+</ul>
+<p><strong>ls</strong></p>
+<ul>
+<li>
+<p>语法：ls [选项] [目录名称…]</p>
+</li>
+<li>
+<p>功能：列出目录/文件夹中的文件列表</p>
+</li>
+</ul>
+<p><img alt="image-20220526100604610" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220526100604610.jpg" /></p>
+<p><strong>gedit</strong></p>
+<ul>
+<li>
+<p>语法：gedit &lt;文件名称&gt;</p>
+</li>
+<li>
+<p>功能：打开gedit编辑器编辑文件，若没有此文件则会新建</p>
+</li>
+</ul>
+<p><img alt="image-20220526100617130" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220526100617130.jpg" /></p>
+<p><strong>mv</strong></p>
+<ul>
+<li>
+<p>语法：mv [选项] &lt;源文件或目录&gt; &lt;目地文件或目录&gt;</p>
+</li>
+<li>
+<p>功能：为文件或目录改名或将文件由一个目录移入另一个目录中</p>
+</li>
+</ul>
+<p><strong>cp</strong></p>
+<ul>
+<li>
+<p>语法：cp [选项] &lt;源文件名称或目录名称&gt; &lt;目的文件名称或目录名称&gt;</p>
+</li>
+<li>
+<p>功能：把一个文件或目录拷贝到另一文件或目录中，或者把多个源文件复制到目标目录中</p>
+</li>
+</ul>
+<p><img alt="image-20220526100626936" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220526100626936.jpg" /></p>
+<p><strong>rm</strong></p>
+<ul>
+<li>
+<p>语法：rm [选项] &lt;文件名称或目录名称…&gt;</p>
+</li>
+<li>
+<p>功能：该命令的功能为删除一个目录中的一个或多个文件或目录，它也可以将某个目录及其下的所有文件及子目录均删除。对于链接文件，只是删除了链接，原有文件均保持不变</p>
+</li>
+</ul>
+<p><img alt="image-20220526100643866" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220526100643866.jpg" /></p>
+<p><strong>sudo</strong></p>
+<ul>
+<li>
+<p>语法：sudo [选项]  [指令]</p>
+</li>
+<li>
+<p>功能：以系统管理员权限来执行指令</p>
+</li>
+</ul>
+<p><img alt="image-20220526100724300" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220526100724300.jpg" /></p>
+<p>这些命令大家不需要死记硬背，未来一边用一边查，用的多了，就会熟悉。</p>
+<hr />
+<h2 id="ros2_1"><strong>ROS2中的命令行</strong></h2>
+<p>ROS2命令行的操作机制与Linux相同，不过所有操作都集成在一个ros2的总命令中，后边第一个参数表示不同的操作目的，比如node表示对节点的操作，topic表示对话题的操作，具体操作干什么，还可以在后边继续跟一系列参数内容。</p>
+<p><img alt="image-20220524082444725" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082444725.jpg" /></p>
+<p>接下来我们就以小海龟仿真为例，一起感受下ROS2命令行的主要功能，也对ROS2中的核心概念有一个大致了解。</p>
+<h3 id="_3"><strong>运行节点程序</strong></h3>
+<p>想要运行ROS2中某个节点，我们可以使用ros2 run命令进行操作，例如我们要运行海龟仿真节点和键盘控制节点：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ ros2 run turtlesim turtlesim_node
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$ ros2 run turtlesim turtle_teleop_key
+</code></pre></div>
+<p><img alt="image-20220524082526919" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082526919.jpg" /></p>
+<h3 id="_4"><strong>查看节点信息</strong></h3>
+<p>当前运行的ROS系统中都有哪些节点呢？可以这样来查看：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ ros2 node list
+</code></pre></div>
+<p><img alt="image-20220524082550228" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082550228.jpg" /></p>
+<p>如果对某一个节点感兴趣，加上一个info子命令，就可以知道它的详细信息啦：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ ros2 node info /turtlesim 
+</code></pre></div>
+<p><img alt="image-20220524082558457" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082558457.jpg" /></p>
+<h3 id="_5"><strong>查看话题信息</strong></h3>
+<p>当前系统中都有话题呢，使用如下命令即可查看：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ ros2 topic list
+</code></pre></div>
+<p><img alt="image-20220524082639408" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082639408.jpg" /></p>
+<p>还想看到某一个话题中的消息数据，加上echo子命令试一试：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ ros2 topic <span class="nb">echo</span> /turtle1/pose 
+</code></pre></div></p>
+<p><img alt="image-20220524082647033" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082647033.jpg" /></p>
+<h3 id="_6"><strong>发布话题消息</strong></h3>
+<p>想要控制海龟动起来，我们还可以直接通过命令行发布话题指令：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ ros2 topic pub --rate <span class="m">1</span> /turtle1/cmd_vel geometry_msgs/msg/Twist <span class="s2">&quot;{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.8}}&quot;</span>
+</code></pre></div></p>
+<p><img alt="image-20220524082721919" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082721919.jpg" /></p>
+<p><img alt="image-20220524082711671" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082711671.jpg" /></p>
+<h3 id="_7"><strong>发送服务请求</strong></h3>
+<p>一只海龟太孤单，仿真器还提供改了一个服务——产生海龟，我们试一试服务调用，再来一只海龟：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$ ros2 service call /spawn turtlesim/srv/Spawn <span class="s2">&quot;{x: 2, y: 2, theta: 0.2, name: &#39;&#39;}&quot;</span>
+</code></pre></div>
+<p><img alt="image-20220524082737479" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082737479.jpg" /></p>
+<p><img alt="image-20220524082745776" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082745776.jpg" /></p>
+<h3 id="_8"><strong>发送动作目标</strong></h3>
+<p>想要让海龟完成一个具体动作，比如转到指定角度，仿真器中提供的这个action可以帮上忙，通过命令行这样发送动作目标：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$ ros2 action send_goal /turtle1/rotate_absolute turtlesim/action/RotateAbsolute <span class="s2">&quot;theta: 3&quot;</span>
+</code></pre></div>
+<p><img alt="image-20220524082809463" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082809463.jpg" /></p>
+<h3 id="_9"><strong>录制控制命令</strong></h3>
+<p>系统运行中的数据有很多，如果想要把某段数据录制下来，回到实验室再复现这段数据如何？ROS2中的rosbag功能还是很好用的，轻松实现数据的录制与播放：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$ ros2 bag record /turtle1/cmd_vel
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>$ ros2 bag play rosbag2_2022_04_11-17_35_40/rosbag2_2022_04_11-17_35_40_0.db3
+</code></pre></div>
+<p><img alt="image-20220524082824817" src="../image/1.4_ROS2%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/image-20220524082824817.jpg" /></p>
+<p>以上就是ROS2中我们常用的命令啦，每一个命令的子命令还有很多，大家可以自己尝试看看。</p>
+<p><img alt="交流群" src="../image/%E4%BA%A4%E6%B5%81%E7%BE%A4.png" /></p>
+<p><a href="https://www.guyuehome.com/" target="_blank"><img alt="图片1" src="../image/footer.png" /></a></p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../1.3_ROS2%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/" class="md-footer__link md-footer__link--prev" aria-label="上一页: ROS2安装方法" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              ROS2安装方法
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../1.5_ROS2%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="md-footer__link md-footer__link--next" aria-label="下一页: ROS2开发环境配置" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              ROS2开发环境配置
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2021 古月居 鄂ICP备18024451号-2
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://www.guyuehome.com" target="_blank" rel="noopener" title="www.guyuehome.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M217.6 96.1c-12.95-.625-24.66 9.156-25.52 22.37-.88 13.23 9.12 24.63 22.32 24.63 79.53 5.188 148.4 74.09 153.6 153.6.828 12.69 11.39 22.43 23.94 22.43.516 0 1.047-.031 1.578-.063 13.22-.843 23.25-12.28 22.39-25.5C409.3 191.8 320.3 102.8 217.6 96.1zM224 0c-17.7 0-32 14.31-32 32s14.33 32 32 32c123.5 0 224 100.5 224 224 0 17.69 14.33 32 32 32s32-14.31 32-32C512 129.2 382.8 0 224 0zm-51.7 226.8c-14.6-2.9-28.3 9-28.3 23.8v50.37c0 10.25 7.127 18.37 16.75 21.1 18.13 6.75 31.26 24.38 31.26 44.1 0 26.5-21.5 47.1-48.01 47.1-26.5 0-48.01-21.5-48.01-47.1V120c0-13.25-10.75-23.1-24.01-23.1l-48.01.008C10.75 96.02 0 106.8 0 120v247.1c0 89.5 82.14 160.2 175 140.7 54.38-11.5 98.27-55.5 109.8-109.7 17.4-82-37-156.3-112.5-171.3z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://class.guyuehome.com" target="_blank" rel="noopener" title="class.guyuehome.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M144.3 32.04c-37.4-.75-80.6 9.4-125.7 29.25C7.18 66.316 0 77.96 0 90.44v357.6c0 11.55 11.99 19.55 22.45 14.65 126.3-59.14 219.8 11 223.8 14.01 2.85 2.2 6.25 3.3 9.75 3.3 12.4 0 16-11.38 16-15.98V80.04c0-5.203-2.531-10.08-6.781-13.08C263.3 65.58 216.7 33.35 144.3 32.04zm413.1 29.25c-45.11-19.79-88.48-29.61-125.7-29.26-72.44 1.312-118.1 33.55-120.9 34.92-4.3 3.01-6.8 7.88-6.8 13.09v383.1c0 5.26 3.5 16.86 16 16.86 3.484 0 6.938-1.125 9.781-3.328 3.925-3.018 97.44-73.16 223.8-14 10.46 4.896 22.45-3.105 22.45-14.65v-357.6C575.1 77.97 568.8 66.31 557.4 61.29z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://space.bilibili.com/386919562" target="_blank" rel="noopener" title="space.bilibili.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M488.6 104.1c16.7 18.1 24.4 39.7 23.3 65.7v202.4c-.4 26.4-9.2 48.1-26.5 65.1-17.2 17-39.1 25.9-65.5 26.7H92.02c-26.45-.8-48.21-9.8-65.28-27.2C9.682 419.4.767 396.5 0 368.2V169.8c.767-26 9.682-47.6 26.74-65.7C43.81 87.75 65.57 78.77 92.02 78h29.38L96.05 52.19c-5.75-5.73-8.63-13-8.63-21.79 0-8.8 2.88-16.06 8.63-21.797C101.8 2.868 109.1 0 117.9 0s16.1 2.868 21.9 8.603L213.1 78h88l74.5-69.397C381.7 2.868 389.2 0 398 0c8.8 0 16.1 2.868 21.9 8.603 5.7 5.737 8.6 12.997 8.6 21.797 0 8.79-2.9 16.06-8.6 21.79L394.6 78h29.3c26.4.77 48 9.75 64.7 26.1zm-38.8 69.7c-.4-9.6-3.7-17.4-10.7-23.5-5.2-6.1-14-9.4-22.7-9.8H96.05c-9.59.4-17.45 3.7-23.58 9.8-6.14 6.1-9.4 13.9-9.78 23.5v194.4c0 9.2 3.26 17 9.78 23.5s14.38 9.8 23.58 9.8H416.4c9.2 0 17-3.3 23.3-9.8 6.3-6.5 9.7-14.3 10.1-23.5V173.8zm-264.3 42.7c6.3 6.3 9.7 14.1 10.1 23.2V273c-.4 9.2-3.7 16.9-9.8 23.2-6.2 6.3-14 9.5-23.6 9.5-9.6 0-17.5-3.2-23.6-9.5-6.1-6.3-9.4-14-9.8-23.2v-33.3c.4-9.1 3.8-16.9 10.1-23.2 6.3-6.3 13.2-9.6 23.3-10 9.2.4 17 3.7 23.3 10zm191.5 0c6.3 6.3 9.7 14.1 10.1 23.2V273c-.4 9.2-3.7 16.9-9.8 23.2-6.1 6.3-14 9.5-23.6 9.5-9.6 0-17.4-3.2-23.6-9.5-7-6.3-9.4-14-9.7-23.2v-33.3c.3-9.1 3.7-16.9 10-23.2 6.3-6.3 14.1-9.6 23.3-10 9.2.4 17 3.7 23.3 10z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://gitee.com/guyuehome" target="_blank" rel="noopener" title="gitee.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/guyuehome" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.highlight"], "search": "../../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a6c66575.min.js"></script>
+      
+        <script src="../../../assets/js/baidu-tongji.js"></script>
+      
+    
+  </body>
+</html>
